@@ -7,4 +7,29 @@
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   %body
-    = yield
+    .container
+      %nav.navbar.navbar-default
+        .container-fluid
+          .navbar-header
+            %button.navbar-toggle.collapsed{"aria-controls" => "navbar", "aria-expanded" => "false", "data-target" => "#navbar", "data-toggle" => "collapse", :type => "button"}
+              %span.sr-only Toggle navigation
+              %span.icon-bar
+              %span.icon-bar
+              %span.icon-bar
+            = link_to "Lunch Ordering", root_path, class: 'navbar-brand'
+          #navbar.navbar-collapse.collapse
+            %ul.nav.navbar-nav.navbar-right
+              %li{class: is_active?(dashboard_index_path) + is_active?(root_path)}
+                = link_to "Dashboard", dashboard_index_path
+              / %li{class: is_active?(offers_tester_path)}
+              /   = link_to "Profile", offers_tester_path
+
+    .container
+      .row
+        = yield
+
+      .row
+        %hr
+        %footer.footer
+          %p &copy; Belkot Oleh 2015
+        = debug(params) if Rails.env.development?
