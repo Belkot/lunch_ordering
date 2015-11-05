@@ -21,8 +21,8 @@
             %ul.nav.navbar-nav.navbar-right
               %li{class: is_active?(dashboard_index_path) + is_active?(root_path)}
                 = link_to "Dashboard", dashboard_index_path
-              / %li{class: is_active?(offers_tester_path)}
-              /   = link_to "Profile", offers_tester_path
+              %li{class: is_active?(edit_user_registration_path)}
+                = link_to "Profile",  edit_user_registration_path
 
     .container
       .row
