@@ -1,0 +1,9 @@
+= simple_form_for(@course) do |f|
+  = f.error_notification
+
+  = f.input :name
+  = f.input :price
+  = f.association :course_type, prompt: "Choose a type"
+
+  = link_to 'Back', courses_path, class: 'btn btn-default'
+  = f.button :submit, class: 'btn btn-primary'

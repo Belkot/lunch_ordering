@@ -16,7 +16,7 @@ class CourseTypesController < ApplicationController
     @course_type = CourseType.new(course_type_params)
 
     if @course_type.save
-      redirect_to @course_type, notice: 'Course type was successfully created.'
+      redirect_to course_types_url, notice: 'Course type was successfully created.'
     else
       render :new
     end

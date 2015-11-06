@@ -6,5 +6,6 @@ Rails.application.routes.draw do
   root 'dashboard#index'
 
   resources :course_types, except: [:show, :destroy]
+  resources :courses
 
 end
