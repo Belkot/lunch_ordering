@@ -1,0 +1,18 @@
+.center-block.col-md-4{:style => "float: none"}
+  .panel.panel-default
+    .panel-heading Course types:
+    .panel-body
+      %table.table.table-striped.table-hover.table-condensed
+        %thead
+          %tr
+            %th #
+            %th Name
+        %tbody
+          - @course_types.each_with_index do |course_type, index|
+            %tr
+              %th{scope: 'row'}
+                = index + 1
+              %td= course_type.name
+              %td= link_to 'Edit', edit_course_type_path(course_type), class: 'btn btn-success btn-xs'
+
+      = link_to 'New Course type', new_course_type_path, class: 'btn btn-primary'

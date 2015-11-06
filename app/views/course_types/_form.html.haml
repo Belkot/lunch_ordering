@@ -1,0 +1,7 @@
+= simple_form_for(@course_type) do |f|
+  = f.error_notification
+
+  = f.input :name
+
+  = link_to 'Back', course_types_path, class: 'btn btn-default'
+  = f.button :submit, class: 'btn btn-primary'

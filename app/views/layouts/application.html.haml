@@ -24,6 +24,8 @@
                   = link_to "Dashboard", dashboard_index_path
                 %li{class: is_active?(edit_user_registration_path)}
                   = link_to "Profile", edit_user_registration_path
+                %li{class: is_active?(course_types_path)}
+                  = link_to "Course types", course_types_path
                 %li
                   = link_to "#{current_user.name} Logout", destroy_user_session_path
               - else
@@ -32,6 +34,13 @@
 
     .container
       .row
+        - flash.each do |type, message|
+          %div{:class => "alert #{alert_class_for(type)} alert-dismissible fade in"}
+            %button.close{"data-dismiss" => "alert", :type => "button"}
+              %span{"aria-hidden" => "true"} ×
+              %span.sr-only Close
+            = message
+
         = yield
 
       .row
