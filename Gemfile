@@ -5,6 +5,7 @@ gem 'bootstrap-sass', '~> 3.3', '>= 3.3.5.1'
 gem 'simple_form', '~> 3.2'
 gem 'carrierwave', '~> 0.10.0'
 gem 'devise', '~> 3.5', '>= 3.5.2'
+gem 'simple_calendar', '~> 2.0', '>= 2.0.3'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.3'
