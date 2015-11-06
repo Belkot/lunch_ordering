@@ -18,11 +18,19 @@
               %span.icon-bar
             = link_to "Lunch Ordering", root_path, class: 'navbar-brand'
           #navbar.navbar-collapse.collapse
+
             %ul.nav.navbar-nav.navbar-right
-              %li{class: is_active?(dashboard_index_path) + is_active?(root_path)}
-                = link_to "Dashboard", dashboard_index_path
-              %li{class: is_active?(edit_user_registration_path)}
-                = link_to "Profile",  edit_user_registration_path
+              - if user_signed_in?
+                %li{class: is_active?(dashboard_index_path) + is_active?(root_path)}
+                  = link_to "Dashboard", dashboard_index_path
+                %li{class: is_active?(edit_user_registration_path)}
+                  = link_to "Profile", edit_user_registration_path
+                %li
+                  = link_to "#{current_user.name} Logout", destroy_user_session_path
+              - else
+                %li{class: is_active?(new_user_session_path)}
+                  = link_to "Login", new_user_session_path
+
 
     .container
       .row
