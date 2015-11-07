@@ -20,16 +20,16 @@
           #navbar.navbar-collapse.collapse
             %ul.nav.navbar-nav.navbar-right
               - if user_signed_in?
-                %li{class: is_active?(dashboard_index_path) + is_active?(root_path)}
-                  = link_to "Dashboard", dashboard_index_path
+                %li{class: is_active?(dashboard_path) + is_active?(root_path)}
+                  = link_to "Dashboard", dashboard_path
                 %li{class: is_active?(edit_user_registration_path)}
                   = link_to "Profile", edit_user_registration_path
                 %li{class: is_active?(course_types_path)}
                   = link_to "Course types", course_types_path
                 %li{class: is_active?(courses_path)}
                   = link_to "Menu", courses_path
-                %li{class: is_active?(user_index_path)}
-                  = link_to "Users", user_index_path
+                %li{class: is_active?(users_path)}
+                  = link_to "Users", users_path
                 %li
                   = link_to "#{current_user.name} Logout", destroy_user_session_path
               - else
