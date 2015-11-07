@@ -6,6 +6,8 @@ Rails.application.routes.draw do
 
   resources :course_types, except: [:show, :destroy]
   resources :courses
+  resources :orders, only: [:index, :new, :create]
+  get 'orders/menu', to: 'orders#menu'
 
   root 'dashboard#index'
 end

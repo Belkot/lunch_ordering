@@ -1,4 +1,6 @@
 %h1 Dashboard
 = month_calendar do |date|
-  / = = link_to "link text...", parent_child_path(@parent, @child)date.day
-  = link_to date
+  - unless date.sunday? || date.saturday?
+    = link_to date.day, controller: 'orders', action: 'menu', date: date if date < Date.today
+    = link_to date.day, new_order_path if date == Date.today
+    = date.day if date > Date.today

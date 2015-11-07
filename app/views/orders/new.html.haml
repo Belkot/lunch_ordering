@@ -1,0 +1,21 @@
+.panel.panel-default
+  .panel-heading Menu:
+  .panel-body
+    = form_for @order do |f|
+      .row
+        - @courses.each do |course_type, courses|
+          .col-md-4
+            .panel.panel-default
+              .panel-heading= course_type.name
+              .panel-body
+                - courses.each do |course|
+                  .radio
+                    %label
+                      = radio_button 'Courses', course_type.name, course.id
+                      = course.name
+                      \-
+                      = number_to_currency course.price, precision: 2
+                      / = label 'Courses', "#{course_type.name}_#{course.id}", course.name
+      .row
+        .col-md-6
+          = f.submit 'Submit', class: 'btn btn-primary'

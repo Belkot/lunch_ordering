@@ -7,34 +7,22 @@ class Course < ActiveRecord::Base
   validates :name, length: { in: 3..30 }, presence: true
   validates :price, numericality: true, presence: true
 
-  before_update :updater
-  before_destroy :deleter
-  after_rollback :saver_self, only: :destroy
-
   scope :today, -> { where(deleted_at: nil) }
+  scope :for_date, ->(date) { where("created_at < ?", date).
+                              where("deleted_at < ? OR deleted_at IS NULL", date)
+                            }
 
-  private
+  def destroy_saver
+    self.deleted_at = DateTime.now
+    self.save
+  end
 
-    def updater
-      unless @flag_delete
-        new_course = Course.new( name: name, price: price, course_type_id: course_type_id )
-        reload
-        unless new_course.name == name && new_course.price == price && new_course.course_type_id == course_type_id
-          deleted_at = DateTime.now
-          new_course.save
-        end
-      end
-    end
+  def update_saver(arg)
+    Course.create( name: arg['name'] || self.name,
+                  price: arg['price'] || self.price,
+         course_type_id: arg['course_type_id'] || self.course_type_id )
+    self.reload
+    self.destroy_saver
+  end
 
-    def deleter
-      @flag_delete = true
-      false
-    end
-
-    def saver_self
-      if @flag_delete
-        deleted_at = DateTime.now
-        save
-      end
-    end
 end

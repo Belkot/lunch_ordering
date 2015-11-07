@@ -26,7 +26,7 @@ class CoursesController < ApplicationController
   end
 
   def update
-    if @course.update(course_params)
+    if @course.update_saver(course_params)
       redirect_to courses_url, notice: 'Course was successfully updated.'
     else
       render :edit
@@ -34,7 +34,7 @@ class CoursesController < ApplicationController
   end
 
   def destroy
-    @course.destroy
+    @course.destroy_saver
     redirect_to courses_url, notice: 'Course was successfully destroyed.'
   end
 

@@ -1,0 +1,17 @@
+.panel.panel-default
+  .panel-heading
+    Menu for
+    = @date
+    \:
+  .panel-body
+    .row
+      - @courses.each do |course_type, courses|
+        .col-md-4
+          .panel.panel-default
+            .panel-heading= course_type.name
+            .panel-body
+              - courses.each do |course|
+                = course.name
+                \-
+                = number_to_currency course.price, precision: 2
+                %br
