@@ -10,8 +10,4 @@ class User < ActiveRecord::Base
 
   before_save { self.admin = true unless User.any? }
 
-  # validates_presence_of   :avatar
-  # validates_integrity_of  :avatar
-  # validates_processing_of :avatar
-
 end

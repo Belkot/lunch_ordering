@@ -1,0 +1,30 @@
+.center-block.col-md-10{:style => "float: none"}
+  .panel.panel-default
+    .panel-heading Users:
+    .panel-body
+      %table.table.table-striped.table-hover.table-condensed
+        %thead
+          %tr
+            %th #
+            %th Avatar
+            %th Type
+            %th Name
+            %th Email
+            %th Time
+        %tbody
+          - @users.each_with_index do |user, index|
+            %tr
+              %th{scope: 'row'}
+                = index + 1
+              %td
+                - if user.avatar.url.present?
+                  = image_tag(user.avatar.url, size: "64")
+              %td= user.admin? ? "Admin" : "User"
+              %td= user.name
+              %td= user.email
+              %td
+                Created:
+                = time_tag user.created_at.to_time
+                %br
+                Updated:
+                = time_tag user.updated_at.to_time

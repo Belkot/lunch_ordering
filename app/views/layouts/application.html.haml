@@ -28,6 +28,8 @@
                   = link_to "Course types", course_types_path
                 %li{class: is_active?(courses_path)}
                   = link_to "Menu", courses_path
+                %li{class: is_active?(user_index_path)}
+                  = link_to "Users", user_index_path
                 %li
                   = link_to "#{current_user.name} Logout", destroy_user_session_path
               - else
