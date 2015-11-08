@@ -4,3 +4,7 @@
     = link_to date.day, controller: 'orders', action: 'menu', date: date if date < Date.today
     = link_to date.day, new_order_path if date == Date.today
     = date.day if date > Date.today
+    / admin
+    %p
+    = link_to 'orderds', controller: 'orders', action: 'index', date: date if date <= Date.today
+

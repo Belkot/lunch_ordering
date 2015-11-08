@@ -1,19 +1,42 @@
-%h1 Listing orders
-
-%table
-  %thead
-    %tr
-      %th
-      %th
-      %th
-
-  %tbody
-    - @orders.each do |order|
-      %tr
-        %td= link_to 'Show', order
-        %td= link_to 'Edit', edit_order_path(order)
-        %td= link_to 'Destroy', order, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-%br
-
-= link_to 'New Order', new_order_path
+.panel.panel-default
+  .panel-heading Listing orders:
+  .panel-body
+    %table.table.table-striped.table-hover.table-condensed
+      %thead
+        %tr
+          %th #
+          %th DateTime
+          %th User name
+          %th User email
+          %th Courses
+          %th Price
+      %tbody
+        - @orders.each_with_index do |order, index|
+          %tr
+            %th{scope: 'row'}
+              = index + 1
+            %td= time_tag order.created_at.to_time
+            %td= order.user.name
+            %td= order.user.email
+            %td
+              %table
+                %tbody
+                  - order.courses.each do |course|
+                    %tr
+                      %td= "#{course.course_type.name}:"
+                      %td
+                        = course.name
+                        \ -
+                      %td
+                        = number_to_currency course.price, precision: 2
+            %td= number_to_currency order.courses.sum(:price), precision: 2
+      %tfoot
+        %tr
+          %td
+          %td
+          %td
+          %td
+          %td
+          %td
+            Total:
+            = number_to_currency total_sum(@orders), precision: 2

@@ -1,7 +1,8 @@
 class OrdersController < ApplicationController
 
   def index
-    @orders = Order.all
+    date = Date.parse(params[:date]) || Date.today
+    @orders = Order.where(created_at: date..(date + 1.day) )
   end
 
   def menu
