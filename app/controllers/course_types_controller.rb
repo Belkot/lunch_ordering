@@ -1,5 +1,5 @@
 class CourseTypesController < ApplicationController
-  before_action :ensure_admin!
+  before_action :authenticate_user!, :ensure_admin!
 
   def index
     @course_types = CourseType.all

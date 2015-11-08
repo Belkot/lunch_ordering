@@ -1,5 +1,5 @@
 class CoursesController < ApplicationController
-  before_action :ensure_admin!
+  before_action :authenticate_user!, :ensure_admin!
   before_action :set_course, only: [:edit, :update, :destroy]
 
   def index

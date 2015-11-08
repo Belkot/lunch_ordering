@@ -1,10 +1,15 @@
 class OrdersController < ApplicationController
-  before_action :ensure_admin!, only: :index
+  before_action :authenticate_user!, except: :index
+  # before_action :ensure_admin!, only: :index
 
   def index
-    @date = Date.parse(params[:date]) if params[:date]
-    @date ||= Date.today
-    @orders = Order.where(created_at: @date..(@date + 1.day) )
+    respond_to do |format|
+      @date = Date.parse(params[:date]) if params[:date]
+      @date ||= Date.today
+      @orders = Order.where(created_at: @date..(@date + 1.day) )
+      format.html { authenticate_user!; ensure_admin! }
+      format.json if Rails.application.secrets.orders_api_key == params[:key]
+    end
   end
 
   def menu
