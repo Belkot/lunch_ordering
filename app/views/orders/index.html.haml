@@ -1,3 +1,7 @@
+= link_to '<<', controller: 'orders', action: 'index', date: @date.yesterday
+= @date
+= link_to '>>', controller: 'orders', action: 'index', date: @date.tomorrow
+
 .panel.panel-default
   .panel-heading Listing orders:
   .panel-body
@@ -40,3 +44,4 @@
           %td
             Total:
             = number_to_currency total_sum(@orders), precision: 2
+
