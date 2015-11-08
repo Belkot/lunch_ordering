@@ -1,11 +1,9 @@
 class CoursesController < ApplicationController
-  before_action :set_course, only: [:show, :edit, :update, :destroy]
+  before_action :ensure_admin!
+  before_action :set_course, only: [:edit, :update, :destroy]
 
   def index
     @courses = Course.today
-  end
-
-  def show
   end
 
   def new

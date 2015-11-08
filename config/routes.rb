@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :course_types, except: [:show, :destroy]
-  resources :courses
+  resources :courses, except: :show
   resources :orders, only: [:index, :new, :create]
   get 'orders/menu', to: 'orders#menu'
 

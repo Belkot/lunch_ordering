@@ -1,4 +1,5 @@
 class CourseTypesController < ApplicationController
+  before_action :ensure_admin!
 
   def index
     @course_types = CourseType.all

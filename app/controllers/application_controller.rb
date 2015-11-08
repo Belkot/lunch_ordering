@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :authenticate_user!
 
   protected
     def configure_permitted_parameters
@@ -30,4 +31,15 @@ class ApplicationController < ActionController::Base
                 )
       }
     end
+
+    def ensure_admin!
+      unless current_user.admin?
+        sign_out current_user
+
+        redirect_to root_path, error: 'Access denied, you must be admin!'
+
+        return false
+      end
+  end
+
 end

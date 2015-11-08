@@ -1,4 +1,5 @@
 class OrdersController < ApplicationController
+  before_action :ensure_admin!, only: :index
 
   def index
     @date = Date.parse(params[:date]) if params[:date]
