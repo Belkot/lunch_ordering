@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  validates :name, length: { in: 3..20 }
+  validates :name, length: { in: 3..20 }, presence: true
 
   before_save { self.admin = true unless User.any? }
 

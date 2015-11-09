@@ -9,7 +9,7 @@ class Course < ActiveRecord::Base
 
   scope :today, -> { where(deleted_at: nil) }
   scope :for_date, ->(date) { where("created_at < ?", date).
-                              where("deleted_at < ? OR deleted_at IS NULL", date)
+                              where("deleted_at > ? OR deleted_at IS NULL", date)
                             }
 
   def destroy_saver

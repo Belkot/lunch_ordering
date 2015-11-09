@@ -36,7 +36,7 @@ class ApplicationController < ActionController::Base
       unless current_user.admin?
         sign_out current_user
 
-        redirect_to root_path, error: 'Access denied, you must be admin!'
+        redirect_to root_path,  alert: 'Access denied, you must be admin!'
 
         return false
       end
