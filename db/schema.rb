@@ -30,14 +30,6 @@ ActiveRecord::Schema.define(version: 20151106114003) do
 
   add_index "courses", ["course_type_id"], name: "index_courses_on_course_type_id"
 
-  create_table "courses_orders", id: false, force: :cascade do |t|
-    t.integer "course_id", null: false
-    t.integer "order_id",  null: false
-  end
-
-  add_index "courses_orders", ["course_id", "order_id"], name: "index_courses_orders_on_course_id_and_order_id"
-  add_index "courses_orders", ["order_id", "course_id"], name: "index_courses_orders_on_order_id_and_course_id"
-
   create_table "line_items", force: :cascade do |t|
     t.integer  "order_id"
     t.integer  "course_id"
