@@ -4,14 +4,27 @@ RSpec.describe OrdersController, type: :controller do
 
   let(:order) { create(:user).orders.create }
 
-  describe "user access" do
+  describe "admin access" do
 
-    login_user
+    login_admin
 
     describe "GET #index" do
       it "assigns all orders as @orders" do
         get :index
         expect(assigns(:orders)).to eq([order])
+      end
+    end
+
+  end
+
+  describe "user access" do
+
+    login_user
+
+    describe "GET #index" do
+      it "denies access" do
+        get :index
+        expect(assigns(:orders)).to redirect_to root_url
       end
     end
 

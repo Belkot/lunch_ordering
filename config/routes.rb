@@ -8,6 +8,9 @@ Rails.application.routes.draw do
   resources :courses, except: :show
   resources :orders, only: [:index, :new, :create]
   get 'orders/menu', to: 'orders#menu'
+  namespace :api do
+    resources :orders, only: :index
+  end
 
   root 'dashboard#index'
 end
