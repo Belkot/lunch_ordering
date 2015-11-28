@@ -3,23 +3,22 @@ class OrdersController < ApplicationController
   before_action :ensure_admin!, only: :index
 
   def index
-    @date = Date.parse(params[:date]) if params[:date]
-    @date ||= Date.today
+    @date = params[:date] ? Date.parse(params[:date]) : Date.today
     @orders = Order.where(created_at: @date..(@date + 1.day))
   end
 
   def menu
     @date = params[:date]
-    if @date
-      @courses = Course.for_date(@date).group_by { |course| course.course_type }
-    else
-      @courses = Course.today.group_by { |course| course.course_type }
-    end
+    @courses = if @date
+                 Course.for_date(@date).group_by(&:course_type)
+               else
+                 Course.today.group_by(&:course_type)
+               end
   end
 
   def new
     @order = Order.new
-    @courses = Course.today.group_by { |course| course.course_type }
+    @courses = Course.today.group_by(&:course_type)
   end
 
   def create
@@ -34,8 +33,8 @@ class OrdersController < ApplicationController
   end
 
   private
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def order_params
-      params.require(:Courses).permit!
-    end
+
+  def order_params
+    params.require(:Courses).permit!
+  end
 end

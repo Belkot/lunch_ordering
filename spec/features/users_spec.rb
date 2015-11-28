@@ -40,7 +40,7 @@ feature 'As s user' do
     date -= 3.day if date.sunday? || date.saturday?
     expect(page).to have_content date.day
     click_link date.day
-    expect(page).to have_content 'Menu:'
+    expect(page).to have_content 'Menu'
     expect(page).to have_content "#{course1.name} - $#{course1.price.round(2)}"
     expect(page).to have_content "#{course2.name} - $#{course2.price.round(2)}"
     expect(page).to have_content "#{course3.name} - $#{course3.price.round(2)}"

@@ -1,5 +1,4 @@
 class Api::OrdersController < ApplicationController
-
   before_action :check_key
 
   def index
@@ -15,5 +14,4 @@ class Api::OrdersController < ApplicationController
       status: 401
     }, status: :unauthorized unless Rails.application.secrets.orders_api_key == params[:key]
   end
-
 end

@@ -8,21 +8,20 @@ class Course < ActiveRecord::Base
   validates :price, numericality: true, presence: true
 
   scope :today, -> { where(deleted_at: nil) }
-  scope :for_date, ->(date) { where("created_at < ?", date).
-                              where("deleted_at > ? OR deleted_at IS NULL", date)
-                            }
+  scope :for_date, ->(date) {
+    where('created_at < ?', date).where('deleted_at > ? OR deleted_at IS NULL', date)
+  }
 
   def destroy_saver
     self.deleted_at = DateTime.now
-    self.save
+    save
   end
 
   def update_saver(arg)
-    Course.create( name: arg['name'] || self.name,
-                  price: arg['price'] || self.price,
-         course_type_id: arg['course_type_id'] || self.course_type_id )
-    self.reload
-    self.destroy_saver
+    Course.create(name: arg['name'] || name,
+                  price: arg['price'] || price,
+                  course_type_id: arg['course_type_id'] || course_type_id)
+    reload
+    destroy_saver
   end
-
 end

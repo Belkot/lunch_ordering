@@ -9,5 +9,4 @@ class User < ActiveRecord::Base
   validates :name, length: { in: 3..20 }, presence: true
 
   before_save { self.admin = true unless User.any? }
-
 end
